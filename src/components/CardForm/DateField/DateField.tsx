@@ -41,11 +41,10 @@ const DateField = (props: DateFieldProps) => {
         />
       </label>
 
-      {monthMeta.touched &&
-      yearMeta.touched &&
-      monthMeta.error &&
-      yearMeta.error ? (
-        <p>ERROR</p>
+      {monthMeta.touched && monthMeta.error ? (
+        <p>{monthMeta.error}</p>
+      ) : yearMeta.touched && yearMeta.error ? (
+        <p>{yearMeta.error}</p>
       ) : null}
     </div>
   );

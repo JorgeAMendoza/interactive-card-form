@@ -20,7 +20,7 @@ const TextField = (props: TextFieldProps) => {
             field.onChange(e);
           }}
         />
-        {meta.touched && meta.error ? <p>ERROR</p> : null}
+        {meta.touched && meta.error ? <p>{meta.error}</p> : null}
       </label>
     </div>
   );
