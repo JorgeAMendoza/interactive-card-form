@@ -5,3 +5,5 @@ export interface CardFormProps {
   cardYearExp: number | '';
   cardCVC: number | '';
 }
+
+export type CardFormPropsKeys = keyof CardFormProps;
