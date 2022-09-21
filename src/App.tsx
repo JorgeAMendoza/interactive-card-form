@@ -1,9 +1,14 @@
 import CardForm from './components/CardForm/CardForm';
+import CardDisplay from './components/CardDisplay/CardDisplay';
+import { CardDisplayProvider } from './context/CardDisplayContext';
 
 function App() {
   return (
     <div className="App">
-      <CardForm />
+      <CardDisplayProvider>
+        <CardForm />
+        <CardDisplay />
+      </CardDisplayProvider>
     </div>
   );
 }

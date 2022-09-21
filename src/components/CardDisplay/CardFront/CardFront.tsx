@@ -1,6 +1,9 @@
 import cardLogo from '../../../assets/card-logo.svg';
+import { useCardDisplayContext } from '../../../context/CardDisplayContext';
 
 const CardFront = () => {
+  const { state } = useCardDisplayContext();
+
   return (
     <div>
       <div>
@@ -10,12 +13,14 @@ const CardFront = () => {
       </div>
 
       <div>
-        <p>0000 0000 0000 0000</p>
+        <p>{state.cardNumber}</p>
       </div>
 
       <div>
-        <p>Jane Appleseed</p>
-        <p>00/00</p>
+        <p>{state.cardName}</p>
+        <p>
+          {state.cardMonthExp}/{state.cardYearExp}
+        </p>
       </div>
     </div>
   );
