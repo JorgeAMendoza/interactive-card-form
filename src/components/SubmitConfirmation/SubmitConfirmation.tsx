@@ -1,9 +1,15 @@
 import submitCompleteIcon from '../../assets/icon-complete.svg';
+import { useCardDisplayContext } from '../../context/CardDisplayContext';
 
-const SubmitConfirmation = () => {
+interface SubmitConfirmationProps {
+  changeToForm: () => void;
+}
+
+const SubmitConfirmation = ({ changeToForm }: SubmitConfirmationProps) => {
+  const { dispatch } = useCardDisplayContext();
   return (
     <section>
-      <div> 
+      <div>
         <img
           src={submitCompleteIcon}
           alt="Submit icon for card submit confirmation"
@@ -14,8 +20,15 @@ const SubmitConfirmation = () => {
         <h1>thank you!</h1>
         <p>we&#39;ve added your card details</p>
       </div>
- 
-      <button>continue</button>
+
+      <button
+        onClick={() => {
+          changeToForm();
+          dispatch({ type: 'RESET' });
+        }}
+      >
+        continue
+      </button>
     </section>
   );
 };
