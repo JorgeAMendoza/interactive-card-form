@@ -74,12 +74,13 @@ export const cardDisplayReducer = (
       let updatedMonth = action.payload;
       if (updatedMonth.length > 2) return state;
       if (action.payload.length === 0) updatedMonth = '00';
+      if (updatedMonth.length == 1) updatedMonth = '0'.concat(action.payload);
 
       return Object.assign({}, state, { cardMonthExp: updatedMonth });
     }
     case 'SET_YEAR': {
       let updatedYear = action.payload;
-      if (updatedYear.length > 2) return state;
+      if (updatedYear.length > 4) return state;
       if (action.payload.length === 0) updatedYear = '00';
 
       return Object.assign({}, state, { cardYearExp: updatedYear });
