@@ -12,7 +12,11 @@ const initialValues: CardFormProps = {
   cardCVC: '',
 };
 
-const CardForm = () => {
+interface CardFormComponentProps {
+  changeToLoading: () => void;
+}
+
+const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
   return (
     <>
       <Formik
@@ -20,6 +24,8 @@ const CardForm = () => {
         validationSchema={yupValidation}
         onSubmit={(values, actions) => {
           console.log({ values, actions });
+          changeToLoading();
+          actions.resetForm();
           actions.setSubmitting(false);
         }}
       >

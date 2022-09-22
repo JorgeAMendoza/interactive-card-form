@@ -1,9 +1,13 @@
 import submitCompleteIcon from '../../assets/icon-complete.svg';
 
-const SubmitConfirmation = () => {
+interface SubmitConfirmationProps {
+  changeToForm: () => void;
+}
+
+const SubmitConfirmation = ({ changeToForm }: SubmitConfirmationProps) => {
   return (
     <section>
-      <div> 
+      <div>
         <img
           src={submitCompleteIcon}
           alt="Submit icon for card submit confirmation"
@@ -14,8 +18,8 @@ const SubmitConfirmation = () => {
         <h1>thank you!</h1>
         <p>we&#39;ve added your card details</p>
       </div>
- 
-      <button>continue</button>
+
+      <button onClick={changeToForm}>continue</button>
     </section>
   );
 };
