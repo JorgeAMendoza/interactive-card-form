@@ -2,7 +2,8 @@ import { Formik, Form } from 'formik';
 import { CardFormProps } from '../../types/forms';
 import DateField from './DateField/DateField';
 import TextField from './TextField/TextField';
-import { yupValidation } from '../utils/form-validation';
+import { yupValidation } from '../../utils/form-validation';
+import CardFormStyled from './CardForm.styled';
 
 const initialValues: CardFormProps = {
   cardHolderName: '',
@@ -18,7 +19,7 @@ interface CardFormComponentProps {
 
 const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
   return (
-    <>
+    <CardFormStyled>
       <Formik
         initialValues={initialValues}
         validationSchema={yupValidation}
@@ -67,7 +68,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
           <button type="submit">confirm</button>
         </Form>
       </Formik>
-    </>
+    </CardFormStyled>
   );
 };
 
