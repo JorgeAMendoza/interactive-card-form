@@ -1,12 +1,13 @@
 import CardFront from './CardFront/CardFront';
 import CardBack from './CardBack/CardBack';
+import CardDisplayStyled from './CardDisplay.styled';
 
 const CardDisplay = () => {
   return (
-    <section>
+    <CardDisplayStyled>
       <CardFront />
       <CardBack />
-    </section>
+    </CardDisplayStyled>
   );
 };
 
