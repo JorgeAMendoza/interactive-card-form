@@ -1,11 +1,12 @@
 import { useCardDisplayContext } from '../../../context/CardDisplayContext';
+import CardBackStyled from './CardBack.styled';
 
 const CardBack = () => {
   const { state } = useCardDisplayContext();
   return (
-    <div>
+    <CardBackStyled>
       <p>{state.cardCVC}</p>
-    </div>
+    </CardBackStyled>
   );
 };
 
