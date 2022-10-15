@@ -18,7 +18,7 @@ export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   background: url(${mobileBackgroundColor}) no-repeat center center/cover;
-  height: 25vh;
+  height: 22rem;
   padding: var(--padding-sm);
 
   @media screen and ${device.tablet} {
