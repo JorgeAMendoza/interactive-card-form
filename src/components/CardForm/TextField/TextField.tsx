@@ -1,17 +1,30 @@
 import { useField } from 'formik';
+import { useEffect, useState } from 'react';
 import { useCardDisplayContext } from '../../../context/CardDisplayContext';
 import { CardFormPropsKeys } from '../../../types/forms';
+import TextFieldStyled from './TextField.styled';
 
-interface TextFieldProps {
+interface InputProps {
   name: CardFormPropsKeys;
   type: string;
-  id: TextFieldProps['name'];
+  id: InputProps['name'];
   placeholder: string;
 }
 
-const TextField = (props: TextFieldProps) => {
-  const [field, meta] = useField(props.name);
+interface TextFieldProps {
+  labelText: string;
+  inputProps: InputProps;
+}
+
+const TextField = ({ labelText, inputProps }: TextFieldProps) => {
+  const [inputInvalid, setInputInvalid] = useState(false);
+  const [field, meta] = useField(inputProps.name);
   const { dispatch } = useCardDisplayContext();
+
+  useEffect(() => {
+    if (meta.touched && meta.error) setInputInvalid(true);
+    else setInputInvalid(false);
+  }, [meta.error]);
 
   const cardDisplayUpdate = (fieldName: CardFormPropsKeys, input: string) => {
     switch (fieldName) {
@@ -31,19 +44,20 @@ const TextField = (props: TextFieldProps) => {
   };
 
   return (
-    <div>
+    <TextFieldStyled inputInvalid={inputInvalid}>
       <label>
+        <p>{labelText}</p>
         <input
           {...field}
-          {...props}
+          {...inputProps}
           onChange={(e) => {
             field.onChange(e);
-            cardDisplayUpdate(props.name, e.target.value);
+            cardDisplayUpdate(inputProps.name, e.target.value);
           }}
         />
         {meta.touched && meta.error ? <p>{meta.error}</p> : null}
       </label>
-    </div>
+    </TextFieldStyled>
   );
 };
 

@@ -4,7 +4,7 @@ import CardDisplay from './components/CardDisplay/CardDisplay';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 import SubmitConfirmation from './components/SubmitConfirmation/SubmitConfirmation';
 import AppStyled from './styles/App.Styled';
-import { Wrapper as CardFormWrapper } from './components/CardForm/CardForm.styled';
+import { CardFormWrapper } from './components/CardForm/CardForm.styled';
 import { Wrapper as CardDisplayWrapper } from './components/CardDisplay/CardDisplay.styled';
 
 type FormState = 'form' | 'loading' | 'thanks';

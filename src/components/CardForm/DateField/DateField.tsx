@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react';
 import { useField } from 'formik';
 import { useCardDisplayContext } from '../../../context/CardDisplayContext';
 import { CardFormPropsKeys } from '../../../types/forms';
+import DateFieldStyled from './DateField.styled';
 
 interface DateFieldProps {
+  labelText: string;
   monthProps: {
     name: 'cardMonthExp';
     type: string;
@@ -17,10 +20,20 @@ interface DateFieldProps {
   };
 }
 
-const DateField = (props: DateFieldProps) => {
-  const [monthField, monthMeta] = useField(props.monthProps.name);
-  const [yearField, yearMeta] = useField(props.yearProps.name);
+const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
+  const [monthInvalid, setMonthInvalid] = useState(false);
+  const [yearInvalid, setYearInvalid] = useState(false);
+  const [monthField, monthMeta] = useField(monthProps.name);
+  const [yearField, yearMeta] = useField(yearProps.name);
   const { dispatch } = useCardDisplayContext();
+
+  useEffect(() => {
+    if (monthMeta.touched && monthMeta.error) setMonthInvalid(true);
+    else setMonthInvalid(false);
+
+    if (yearMeta.touched && yearMeta.error) setYearInvalid(true);
+    else setYearInvalid(false);
+  }, [monthMeta.touched, monthMeta.error, yearMeta.touched, yearMeta.error]);
 
   const cardDisplayUpdate = (fieldName: CardFormPropsKeys, input: string) => {
     switch (fieldName) {
@@ -36,35 +49,38 @@ const DateField = (props: DateFieldProps) => {
   };
 
   return (
-    <div>
-      <label>
-        <input
-          {...monthField}
-          {...props.monthProps}
-          onChange={(e) => {
-            monthField.onChange(e);
-            cardDisplayUpdate(props.monthProps.name, e.target.value);
-          }}
-        />
-      </label>
+    <DateFieldStyled monthInvalid={monthInvalid} yearInvalid={yearInvalid}>
+      <p>{labelText}</p>
+      <div>
+        <label>
+          <input
+            {...monthField}
+            {...monthProps}
+            onChange={(e) => {
+              monthField.onChange(e);
+              cardDisplayUpdate(monthProps.name, e.target.value);
+            }}
+          />
+        </label>
 
-      <label>
-        <input
-          {...yearField}
-          {...props.yearProps}
-          onChange={(e) => {
-            yearField.onChange(e);
-            cardDisplayUpdate(props.yearProps.name, e.target.value);
-          }}
-        />
-      </label>
+        <label>
+          <input
+            {...yearField}
+            {...yearProps}
+            onChange={(e) => {
+              yearField.onChange(e);
+              cardDisplayUpdate(yearProps.name, e.target.value);
+            }}
+          />
+        </label>
+      </div>
 
       {monthMeta.touched && monthMeta.error ? (
         <p>{monthMeta.error}</p>
       ) : yearMeta.touched && yearMeta.error ? (
         <p>{yearMeta.error}</p>
       ) : null}
-    </div>
+    </DateFieldStyled>
   );
 };
 

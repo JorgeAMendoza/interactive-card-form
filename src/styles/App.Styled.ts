@@ -10,10 +10,11 @@ const AppStyled = styled.main`
     flex-direction: row;
 
     > *:first-child {
-      border: 5px solid black;
       width: min(35vw, 100rem);
     }
   }
 `;
+
+
 
 export default AppStyled;
