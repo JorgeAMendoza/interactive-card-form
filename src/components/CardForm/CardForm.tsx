@@ -6,6 +6,7 @@ import { yupValidation } from '../../utils/form-validation';
 import CardFormStyled from './CardForm.styled';
 import { PrimaryButton } from '../../styles/Button.styled';
 import { DateCVCWrapper } from './CardForm.styled';
+import validateDate from '../../utils/validate-date';
 
 const initialValues: CardFormProps = {
   cardHolderName: '',
@@ -27,8 +28,18 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
         validationSchema={yupValidation}
         onSubmit={(values, actions) => {
           console.log({ values, actions });
-          changeToLoading();
-          actions.resetForm();
+          if (
+            validateDate(
+              Number(values.cardMonthExp),
+              Number(values.cardMonthExp)
+            )
+          ) {
+            changeToLoading();
+            actions.resetForm();
+          } else {
+            actions.setFieldError('cardMonthExp', 'invalid date');
+            actions.setFieldError('cardYearExp', 'invalid date');
+          }
           actions.setSubmitting(false);
         }}
       >
