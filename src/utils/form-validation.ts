@@ -11,7 +11,7 @@ export const yupValidation = Yup.object({
     })
     .required("Can't be blank"),
   cardMonthExp: Yup.number()
-    .test('len', 'Wrong format, must be less than two digits', (val) => {
+    .test('len', 'invalid month', (val) => {
       if (!val) return true;
       if (val.toString().length > 2) return false;
       else return true;
@@ -20,12 +20,16 @@ export const yupValidation = Yup.object({
     .max(12, 'Invalid month')
     .required("Can't be blank"),
   cardYearExp: Yup.number()
-    .test('len', 'Wrong format, must be four digits', (val) => {
+    .test('len', 'invalid year', (val) => {
       if (!val) return true;
-      if (val.toString().length === 4) return true;
+      if (val.toString().length === 2) return true;
       else return false;
     })
-    .min(new Date().getFullYear(), 'Invalid year')
+    .min(Number(new Date().getFullYear().toString().slice(-2)), 'invalid year')
+    .max(
+      Number(new Date().getFullYear().toString().slice(-2)) + 5,
+      'invalid year'
+    )
     .required("Can't be blank"),
   cardCVC: Yup.number()
     .test('len', 'Wrong format, must be three digits', (val) => {

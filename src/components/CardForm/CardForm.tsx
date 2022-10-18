@@ -59,7 +59,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
                 name: 'cardMonthExp',
                 id: 'cardMonthExp',
                 placeholder: 'MM',
-                type: 'text',
+                type: 'number',
               }}
               yearProps={{
                 name: 'cardYearExp',
