@@ -7,6 +7,7 @@ import CardFormStyled from './CardForm.styled';
 import { PrimaryButton } from '../../styles/Button.styled';
 import { DateCVCWrapper } from './CardForm.styled';
 import validateDate from '../../utils/validate-date';
+import { useState } from 'react';
 
 const initialValues: CardFormProps = {
   cardHolderName: '',
@@ -21,8 +22,9 @@ interface CardFormComponentProps {
 }
 
 const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
+  const [formSent, setFormSent] = useState<'sent' | 'idle'>('idle');
   return (
-    <CardFormStyled>
+    <CardFormStyled data-formsent={formSent} onAnimationEnd={changeToLoading}>
       <Formik
         initialValues={initialValues}
         validationSchema={yupValidation}
@@ -34,7 +36,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
               Number(values.cardMonthExp)
             )
           ) {
-            changeToLoading();
+            setFormSent('sent');
             actions.resetForm();
           } else {
             actions.setFieldError('cardMonthExp', 'invalid date');

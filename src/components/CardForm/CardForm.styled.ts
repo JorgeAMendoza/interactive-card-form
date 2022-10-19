@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import device from '../../utils/device-breakpoints';
+import { fadeOut } from '../../styles/animations';
 
 const CardFormStyled = styled.div`
   margin-block-start: var(--block-flow-md);
   width: 100%;
+
+  &[data-formsent='sent'] {
+    animation: ${fadeOut} 0.5s linear;
+  }
 
   @media screen and (${device.tablet}) {
     margin-block-start: 0;
