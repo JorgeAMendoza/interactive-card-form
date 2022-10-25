@@ -33,11 +33,10 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
           if (
             validateDate(
               Number(values.cardMonthExp),
-              Number(values.cardMonthExp)
+              Number(values.cardYearExp)
             )
           ) {
             setFormSent('sent');
-            actions.resetForm();
           } else {
             actions.setFieldError('cardMonthExp', 'invalid date');
             actions.setFieldError('cardYearExp', 'invalid date');
