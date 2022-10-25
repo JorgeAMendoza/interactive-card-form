@@ -1,5 +1,6 @@
 import submitCompleteIcon from '../../assets/icon-complete.svg';
 import { useCardDisplayContext } from '../../context/CardDisplayContext';
+import { PrimaryButton } from '../../styles/Button.styled';
 import SubmitConfirmationStyled from './SubmitConfirmation.styled';
 
 interface SubmitConfirmationProps {
@@ -19,17 +20,17 @@ const SubmitConfirmation = ({ changeToForm }: SubmitConfirmationProps) => {
 
       <div>
         <h1>thank you!</h1>
-        <p>we&#39;ve added your card details</p>
+        <p>We&#39;ve added your card details</p>
       </div>
 
-      <button
+      <PrimaryButton
         onClick={() => {
           changeToForm();
           dispatch({ type: 'RESET' });
         }}
       >
         continue
-      </button>
+      </PrimaryButton>
     </SubmitConfirmationStyled>
   );
 };

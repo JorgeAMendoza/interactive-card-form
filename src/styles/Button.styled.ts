@@ -4,10 +4,10 @@ const Button = styled.button`
   border: none;
   font-family: inherit;
   cursor: pointer;
-  min-width: 4ch;
   padding: 1.5rem 3rem;
   border-radius: 8px;
   text-transform: capitalize;
+  text-align: center;
 `;
 
 export const PrimaryButton = styled(Button)`
