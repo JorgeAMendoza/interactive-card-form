@@ -3,7 +3,6 @@ import device from '../../utils/device-breakpoints';
 import { fadeOut } from '../../styles/animations';
 
 const CardFormStyled = styled.div`
-  margin-block-start: var(--block-flow-md);
   width: 100%;
 
   &[data-formsent='sent'] {
@@ -22,10 +21,15 @@ const CardFormStyled = styled.div`
 
 export const CardFormWrapper = styled.section`
   padding: var(--padding-sm);
+  margin-block-start: var(--block-flow-lg);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (${device.tablet}) {
+    margin-block-start: 0;
+  }
 `;
 
 export const DateCVCWrapper = styled.div`

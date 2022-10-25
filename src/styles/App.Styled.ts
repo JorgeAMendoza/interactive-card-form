@@ -15,6 +15,4 @@ const AppStyled = styled.main`
   }
 `;
 
-
-
 export default AppStyled;
