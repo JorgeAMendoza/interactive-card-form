@@ -31,6 +31,7 @@ const CardFrontStyled = styled(CardFaceWrapper)`
 
     > div:nth-child(2) {
       grid-area: cardNumber;
+      letter-spacing: 1.5px;
       align-self: end;
     }
 

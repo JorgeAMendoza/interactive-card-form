@@ -2,6 +2,8 @@ import cardLogo from '../../../assets/card-logo.svg';
 import { useCardDisplayContext } from '../../../context/CardDisplayContext';
 import CardFrontStyled from './CardFront.styled';
 
+const spaceRegex = /([0-9]{1,4})/gi;
+
 const CardFront = () => {
   const { state } = useCardDisplayContext();
 
@@ -15,7 +17,7 @@ const CardFront = () => {
         </div>
 
         <div>
-          <p>{state.cardNumber}</p>
+          <p>{state.cardNumber.replace(spaceRegex, '$1 ')}</p>
         </div>
 
         <div>

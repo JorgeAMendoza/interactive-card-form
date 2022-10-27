@@ -28,7 +28,8 @@ const TextField = (props: TextFieldProps) => {
         return;
       }
       case 'cardNumber': {
-        dispatch({ type: 'SET_NUMBER', payload: input });
+        const numberNoSpaces = input.replace(/\s/gi, '');
+        dispatch({ type: 'SET_NUMBER', payload: numberNoSpaces });
         return;
       }
       case 'cardCVC': {

@@ -61,7 +61,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
             <label data-testid="cardNumber">
               Card number
               <TextField
-                type="text"
+                type="number"
                 name="cardNumber"
                 id="cardNumber"
                 placeholder="e.g. 1234 5678 9123 0000"
