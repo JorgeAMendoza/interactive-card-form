@@ -4,27 +4,22 @@ import { useCardDisplayContext } from '../../../context/CardDisplayContext';
 import { CardFormPropsKeys } from '../../../types/forms';
 import TextFieldStyled from './TextField.styled';
 
-interface InputProps {
+interface TextFieldProps {
   name: CardFormPropsKeys;
   type: string;
-  id: InputProps['name'];
+  id: TextFieldProps['name'];
   placeholder: string;
 }
 
-interface TextFieldProps {
-  labelText: string;
-  inputProps: InputProps;
-}
-
-const TextField = ({ labelText, inputProps }: TextFieldProps) => {
+const TextField = (props: TextFieldProps) => {
   const [inputInvalid, setInputInvalid] = useState(false);
-  const [field, meta] = useField(inputProps.name);
+  const [field, meta] = useField(props.name);
   const { dispatch } = useCardDisplayContext();
 
   useEffect(() => {
     if (meta.touched && meta.error) setInputInvalid(true);
     else setInputInvalid(false);
-  }, [meta.error]);
+  }, [meta.error, meta.touched]);
 
   const cardDisplayUpdate = (fieldName: CardFormPropsKeys, input: string) => {
     switch (fieldName) {
@@ -45,18 +40,15 @@ const TextField = ({ labelText, inputProps }: TextFieldProps) => {
 
   return (
     <TextFieldStyled inputInvalid={inputInvalid}>
-      <label>
-        <p>{labelText}</p>
-        <input
-          {...field}
-          {...inputProps}
-          onChange={(e) => {
-            field.onChange(e);
-            cardDisplayUpdate(inputProps.name, e.target.value);
-          }}
-        />
-        {meta.touched && meta.error ? <p>{meta.error}</p> : null}
-      </label>
+      <input
+        {...field}
+        {...props}
+        onChange={(e) => {
+          field.onChange(e);
+          cardDisplayUpdate(props.name, e.target.value);
+        }}
+      />
+      {meta.touched && meta.error ? <p>{meta.error}</p> : null}
     </TextFieldStyled>
   );
 };

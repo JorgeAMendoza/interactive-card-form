@@ -45,24 +45,29 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
         }}
       >
         <Form>
-          <TextField
-            labelText="cardholder name"
-            inputProps={{
-              type: 'text',
-              name: 'cardHolderName',
-              id: 'cardHolderName',
-              placeholder: 'e.g. Jane Appleseed',
-            }}
-          />
-          <TextField
-            labelText="card number"
-            inputProps={{
-              type: 'text',
-              name: 'cardNumber',
-              id: 'cardNumber',
-              placeholder: 'e.g. 1234 5678 9123 0000',
-            }}
-          />
+          <div>
+            <label data-testid="cardHolderName">
+              Cardholder name
+              <TextField
+                type="text"
+                name="cardHolderName"
+                id="cardHolderName"
+                placeholder="e.g. Jane Appleseed"
+              />
+            </label>
+          </div>
+
+          <div>
+            <label data-testid="cardNumber">
+              Card number
+              <TextField
+                type="text"
+                name="cardNumber"
+                id="cardNumber"
+                placeholder="e.g. 1234 5678 9123 0000"
+              />
+            </label>
+          </div>
 
           <DateCVCWrapper>
             <DateField
@@ -81,15 +86,15 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
               }}
             />
 
-            <TextField
-              labelText="CVC"
-              inputProps={{
-                type: 'text',
-                name: 'cardCVC',
-                placeholder: 'e.g. 123',
-                id: 'cardCVC',
-              }}
-            />
+            <label data-testid="cardCVC">
+              CVC
+              <TextField
+                type="text"
+                name="cardCVC"
+                placeholder="e.g. 123"
+                id="cardCVC"
+              />
+            </label>
           </DateCVCWrapper>
 
           <PrimaryButton type="submit">confirm</PrimaryButton>

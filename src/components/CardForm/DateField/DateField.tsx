@@ -52,7 +52,7 @@ const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
     <DateFieldStyled monthInvalid={monthInvalid} yearInvalid={yearInvalid}>
       <p>{labelText}</p>
       <div>
-        <label>
+        <label data-testid="cardMonthExp">
           <input
             {...monthField}
             {...monthProps}
@@ -60,10 +60,11 @@ const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
               monthField.onChange(e);
               cardDisplayUpdate(monthProps.name, e.target.value);
             }}
+            aria-label="card month experation input"
           />
         </label>
 
-        <label>
+        <label data-testid="cardYearExp">
           <input
             {...yearField}
             {...yearProps}
@@ -71,6 +72,7 @@ const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
               yearField.onChange(e);
               cardDisplayUpdate(yearProps.name, e.target.value);
             }}
+            aria-label="card month experation input"
           />
         </label>
       </div>

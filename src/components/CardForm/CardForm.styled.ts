@@ -5,6 +5,29 @@ import { fadeOut } from '../../styles/animations';
 const CardFormStyled = styled.div`
   width: 100%;
 
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    button {
+      margin-block-start: 2rem;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  > form label {
+    font-size: var(--small-text);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+
   &[data-formsent='sent'] {
     animation: ${fadeOut} 0.5s linear;
   }
@@ -12,10 +35,6 @@ const CardFormStyled = styled.div`
   @media screen and (${device.tablet}) {
     margin-block-start: 0;
     width: 38.5rem;
-  }
-
-  form > * {
-    margin-block-end: min(2.5rem, 4.5vh);
   }
 `;
 
@@ -35,14 +54,16 @@ export const CardFormWrapper = styled.section`
 export const DateCVCWrapper = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  flex-direction: row !important;
+  gap: 1.5rem;
 
   > div:nth-of-type(1) {
-    width: 40%;
+    flex: 1;
+    width: 50%;
   }
 
-  > div:nth-of-type(2) {
-    width: 60%;
+  > label {
+    width: 50%;
   }
 `;
 
