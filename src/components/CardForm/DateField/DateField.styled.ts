@@ -17,15 +17,15 @@ const DateFieldStyled = styled.div<DateFieldStyledProps>`
   }
 
   p:last-child {
-    font-size: 1.2rem;
+    font-size: var(--small-text);
     text-transform: none;
-    margin-block-start: 1rem;
     color: #ff5050;
+    margin-block-start: 0.8rem;
   }
 
   > div {
     display: flex;
-    margin-block-start: 0.5rem;
+    margin-block-start: 1rem;
     align-items: flex-start;
     gap: 1rem;
   }
@@ -44,7 +44,6 @@ const DateFieldStyled = styled.div<DateFieldStyledProps>`
     color: inherit;
     border-radius: 4px;
     font-weight: inherit;
-    margin-block-start: 0.5rem;
 
     &:focus {
       outline: 1px solid var(--primary-color);
