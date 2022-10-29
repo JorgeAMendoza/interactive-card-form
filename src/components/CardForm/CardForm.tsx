@@ -61,10 +61,11 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
             <label data-testid="cardNumber">
               Card number
               <TextField
-                type="number"
+                type="text"
                 name="cardNumber"
                 id="cardNumber"
                 placeholder="e.g. 1234 5678 9123 0000"
+                maxLength={16}
               />
             </label>
           </div>
@@ -76,13 +77,15 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
                 name: 'cardMonthExp',
                 id: 'cardMonthExp',
                 placeholder: 'MM',
-                type: 'number',
+                type: 'text',
+                maxLength: 2,
               }}
               yearProps={{
                 name: 'cardYearExp',
-                type: 'number',
+                type: 'text',
                 placeholder: 'YY',
                 id: 'cardYearExp',
+                maxLength: 2,
               }}
             />
 
@@ -93,6 +96,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
                 name="cardCVC"
                 placeholder="e.g. 123"
                 id="cardCVC"
+                maxLength={3}
               />
             </label>
           </DateCVCWrapper>

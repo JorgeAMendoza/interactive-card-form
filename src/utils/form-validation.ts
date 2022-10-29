@@ -47,5 +47,11 @@ export const yupValidation = Yup.object({
       if (val?.toString().length === 3) return true;
       else return false;
     })
+    .test('valid', 'Wrong format, numbers only', (val) => {
+      if (!val) return true;
+      const numbersRegex = /[^0-9]/gi;
+      if (!numbersRegex.test(val.toString())) return true;
+      else return false;
+    })
     .required("Can't be blank"),
 });
