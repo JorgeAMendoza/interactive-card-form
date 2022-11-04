@@ -8,6 +8,7 @@ import { PrimaryButton } from '../../styles/Button.styled';
 import { DateCVCWrapper } from './CardForm.styled';
 import validateDate from '../../utils/validate-date';
 import { useState } from 'react';
+import cardNumberSpaces from '../../utils/card-number-spaces';
 
 const initialValues: CardFormProps = {
   cardHolderName: '',
@@ -29,7 +30,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
         initialValues={initialValues}
         validationSchema={yupValidation}
         onSubmit={(values, actions) => {
-          console.log({ values, actions });
+          ({ values, actions });
           if (
             validateDate(
               Number(values.cardMonthExp),
@@ -49,10 +50,12 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
             <label data-testid="cardHolderName">
               Cardholder name
               <TextField
-                type="text"
-                name="cardHolderName"
-                id="cardHolderName"
-                placeholder="e.g. Jane Appleseed"
+                inputProps={{
+                  type: 'text',
+                  name: 'cardHolderName',
+                  id: 'cardHoldeName',
+                  placeholder: 'e.g. Jane Appleseed',
+                }}
               />
             </label>
           </div>
@@ -61,11 +64,14 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
             <label data-testid="cardNumber">
               Card number
               <TextField
-                type="text"
-                name="cardNumber"
-                id="cardNumber"
-                placeholder="e.g. 1234 5678 9123 0000"
-                maxLength={16}
+                inputProps={{
+                  type: 'text',
+                  id: 'cardNumber',
+                  name: 'cardNumber',
+                  placeholder: 'e.g. 1234 5678 1234 5678',
+                  maxLength: 20,
+                }}
+                textModifier={cardNumberSpaces}
               />
             </label>
           </div>
@@ -92,11 +98,12 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
             <label data-testid="cardCVC">
               CVC
               <TextField
-                type="text"
-                name="cardCVC"
-                placeholder="e.g. 123"
-                id="cardCVC"
-                maxLength={3}
+                inputProps={{
+                  type: 'text',
+                  name: 'cardCVC',
+                  placeholder: 'e.g. 123',
+                  maxLength: 3,
+                }}
               />
             </label>
           </DateCVCWrapper>

@@ -20,10 +20,10 @@ const LoadingSpinner = ({ changeToThanks }: LoadingSpinnerProps) => {
     };
   }, []);
 
-  console.log(submitLoading);
+  submitLoading;
 
   const animationEnd = () => {
-    console.log('in animation end here', submitLoading);
+    'in animation end here', submitLoading;
     if (submitLoading === 'loading') return;
     else changeToThanks();
   };
