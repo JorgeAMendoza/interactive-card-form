@@ -3,9 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useCardDisplayContext } from '../../../context/CardDisplayContext';
 import TextFieldStyled from './TextField.styled';
 
-const TextField = (props: React.HTMLProps<HTMLInputElement>) => {
+interface TextFieldProps {
+  inputProps: React.HTMLProps<HTMLInputElement>;
+  textModifier?: (input: string) => string;
+}
+
+const TextField = ({ inputProps, textModifier }: TextFieldProps) => {
+  inputProps.name;
   const [inputInvalid, setInputInvalid] = useState(false);
-  const [field, meta] = useField(props.name as string);
+  const [field, meta] = useField(inputProps.name as string);
   const { dispatch } = useCardDisplayContext();
 
   useEffect(() => {
@@ -19,7 +25,6 @@ const TextField = (props: React.HTMLProps<HTMLInputElement>) => {
   ) => {
     switch (fieldName.name) {
       case 'cardHolderName': {
-        
         dispatch({ type: 'SET_NAME', payload: input });
         return;
       }
@@ -42,10 +47,14 @@ const TextField = (props: React.HTMLProps<HTMLInputElement>) => {
     <TextFieldStyled inputInvalid={inputInvalid}>
       <input
         {...field}
-        {...props}
+        {...inputProps}
         onChange={(e) => {
+          if (textModifier) {
+            if (!(meta.value === textModifier(e.target.value)))
+              e.target.value = textModifier(e.target.value);
+          }
           field.onChange(e);
-          cardDisplayUpdate(props, e.target.value);
+          cardDisplayUpdate(inputProps, e.target.value);
         }}
       />
       {meta.touched && meta.error ? <p>{meta.error}</p> : null}
