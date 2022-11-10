@@ -21,6 +21,7 @@ const CardFrontStyled = styled(CardFaceWrapper)`
       'cardLogo cardLogo'
       'cardNumber cardNumber'
       'cardNameCVC cardNameCVC';
+    gap: 1rem;
 
     > div:nth-child(1) {
       grid-area: cardLogo;
@@ -32,6 +33,7 @@ const CardFrontStyled = styled(CardFaceWrapper)`
       grid-area: cardNumber;
       letter-spacing: 1.5px;
       align-self: end;
+      font-size: clamp(1.6rem, 2vw, 2rem);
     }
 
     > div:nth-child(3) {
@@ -39,6 +41,9 @@ const CardFrontStyled = styled(CardFaceWrapper)`
       display: flex;
       justify-content: space-between;
       align-self: center;
+      font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
     }
   }
 
