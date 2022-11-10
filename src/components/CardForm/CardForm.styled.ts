@@ -47,6 +47,9 @@ export const CardFormWrapper = styled.section`
 
   @media screen and (${device.laptop}) {
     margin-block-start: 0;
+    justify-content: normal;
+    /* clamp the margin */
+    margin-left: clamp(24rem, 17vw, 27rem);
   }
 `;
 
