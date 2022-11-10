@@ -17,8 +17,9 @@ const CardBackStyled = styled(CardFaceWrapper)`
   p {
     position: absolute;
     right: 12%;
-    top: 50%;
+    top: 49.5%;
     transform: translateY(-50%);
+    font-size: clamp(1.2rem, 1.5vw, 1.6rem);
   }
 `;
 
