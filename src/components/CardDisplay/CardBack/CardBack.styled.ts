@@ -4,16 +4,19 @@ import { CardFaceWrapper } from '../CardDisplay.styled';
 import device from '../../../utils/device-breakpoints';
 
 const CardBackStyled = styled(CardFaceWrapper)`
-  background: url(${cardBackBackground}) no-repeat center center/contain;
+  background: url(${cardBackBackground}) no-repeat center center/cover;
   position: relative;
+  color: white;
+  letter-spacing: 2px;
+  transform: translate(10%, 4%);
 
-  @media screen and (${device.tablet}) {
+  @media screen and (${device.laptop}) {
     transform: translateX(50%);
     align-self: flex-end;
   }
   p {
     position: absolute;
-    right: 15%;
+    right: 12%;
     top: 50%;
     transform: translateY(-50%);
   }

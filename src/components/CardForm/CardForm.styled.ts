@@ -3,7 +3,7 @@ import device from '../../utils/device-breakpoints';
 import { fadeOut } from '../../styles/animations';
 
 const CardFormStyled = styled.div`
-  width: 100%;
+  width: min(100%, 38.5rem);
 
   form {
     display: flex;
@@ -34,19 +34,18 @@ const CardFormStyled = styled.div`
 
   @media screen and (${device.tablet}) {
     margin-block-start: 0;
-    width: 38.5rem;
   }
 `;
 
 export const CardFormWrapper = styled.section`
   padding: var(--padding-sm);
-  margin-block-start: var(--block-flow-lg);
+  margin-block-start: 18vw;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  @media screen and (${device.tablet}) {
+  @media screen and (${device.laptop}) {
     margin-block-start: 0;
   }
 `;

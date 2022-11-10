@@ -3,7 +3,7 @@ export const initialState: CardDisplayState = {
   cardNumber: '0000000000000000',
   cardMonthExp: '00',
   cardYearExp: '00',
-  cardCVC: '00',
+  cardCVC: '000',
 };
 
 export interface CardDisplayState {
@@ -88,7 +88,7 @@ export const cardDisplayReducer = (
     case 'SET_CVC': {
       let updatedCVC = action.payload;
       if (updatedCVC.length > 3) return state;
-      if (action.payload.length === 0) updatedCVC = '00';
+      if (action.payload.length === 0) updatedCVC = '000';
 
       return Object.assign({}, state, { cardCVC: updatedCVC });
     }

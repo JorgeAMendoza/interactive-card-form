@@ -6,7 +6,7 @@ const AppStyled = styled.main`
   flex-direction: column;
   height: 100vh;
 
-  @media screen and ${device.tablet} {
+  @media screen and ${device.laptop} {
     flex-direction: row;
 
     > *:first-child {

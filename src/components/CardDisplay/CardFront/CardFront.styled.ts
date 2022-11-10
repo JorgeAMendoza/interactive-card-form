@@ -4,12 +4,11 @@ import cardFrontBackground from '../../../assets/bg-card-front.png';
 import device from '../../../utils/device-breakpoints';
 
 const CardFrontStyled = styled(CardFaceWrapper)`
-  background: url(${cardFrontBackground}) no-repeat center center/contain;
+  background: url(${cardFrontBackground}) no-repeat center center/cover;
   position: relative;
   color: white;
-  align-self: flex-start;
   z-index: 1;
-  transform: translateY(-38%);
+  transform: translate(-10%, -38%);
 
   > div {
     padding: 2rem 3rem;
@@ -25,7 +24,7 @@ const CardFrontStyled = styled(CardFaceWrapper)`
 
     > div:nth-child(1) {
       grid-area: cardLogo;
-      width: 5.4rem;
+      width: clamp(5.4rem, 10vw, 8rem);
       align-self: end;
     }
 
@@ -43,7 +42,7 @@ const CardFrontStyled = styled(CardFaceWrapper)`
     }
   }
 
-  @media screen and (${device.tablet}) {
+  @media screen and (${device.laptop}) {
     transform: translateX(25%);
     align-self: flex-end;
     margin-block-end: var(--block-flow-md);
