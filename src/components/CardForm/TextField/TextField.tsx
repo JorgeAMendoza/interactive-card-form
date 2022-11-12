@@ -57,7 +57,9 @@ const TextField = ({ inputProps, textModifier }: TextFieldProps) => {
           cardDisplayUpdate(inputProps, e.target.value);
         }}
       />
-      {meta.touched && meta.error ? <p>{meta.error}</p> : null}
+      {meta.touched && meta.error ? (
+        <p data-cy={`${field.name}Error`}>{meta.error}</p>
+      ) : null}
     </TextFieldStyled>
   );
 };

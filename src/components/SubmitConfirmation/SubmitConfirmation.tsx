@@ -10,7 +10,7 @@ interface SubmitConfirmationProps {
 const SubmitConfirmation = ({ changeToForm }: SubmitConfirmationProps) => {
   const { dispatch } = useCardDisplayContext();
   return (
-    <SubmitConfirmationStyled>
+    <SubmitConfirmationStyled data-cy="submitConfirmation">
       <div>
         <img
           src={submitCompleteIcon}
@@ -24,6 +24,7 @@ const SubmitConfirmation = ({ changeToForm }: SubmitConfirmationProps) => {
       </div>
 
       <PrimaryButton
+        data-cy="submitConfirmationButton"
         onClick={() => {
           changeToForm();
           dispatch({ type: 'RESET' });

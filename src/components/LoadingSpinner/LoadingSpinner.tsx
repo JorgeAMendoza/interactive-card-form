@@ -20,10 +20,7 @@ const LoadingSpinner = ({ changeToThanks }: LoadingSpinnerProps) => {
     };
   }, []);
 
-  submitLoading;
-
   const animationEnd = () => {
-    'in animation end here', submitLoading;
     if (submitLoading === 'loading') return;
     else changeToThanks();
   };
@@ -32,6 +29,7 @@ const LoadingSpinner = ({ changeToThanks }: LoadingSpinnerProps) => {
     <LoadingSpinnerStyled
       onAnimationEnd={animationEnd}
       data-submitloading={submitLoading}
+      data-cy="loadingSpinner"
     >
       <img src={loadingCircleGIF} alt="loading gif" />
     </LoadingSpinnerStyled>

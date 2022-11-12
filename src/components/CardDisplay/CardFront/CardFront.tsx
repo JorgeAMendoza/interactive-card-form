@@ -17,12 +17,14 @@ const CardFront = () => {
         </div>
 
         <div>
-          <p>{state.cardNumber.replace(spaceRegex, '$1 ')}</p>
+          <p data-cy="cardDisplayNumber">
+            {state.cardNumber.replace(spaceRegex, '$1 ')}
+          </p>
         </div>
 
         <div>
-          <p>{state.cardName}</p>
-          <p>
+          <p data-cy="cardDisplayName">{state.cardName}</p>
+          <p data-cy="cardDisplayDate">
             {state.cardMonthExp}/{state.cardYearExp}
           </p>
         </div>

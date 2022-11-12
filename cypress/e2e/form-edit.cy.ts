@@ -3,16 +3,16 @@
 describe('initial page load', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('[data-testid="cardForm"]').as('cardForm');
-    cy.get('[data-testid="cardDisplayName"]').as('cardDisplayName');
-    cy.get('[data-testid="cardDisplayNumber"]').as('cardDisplayNumber');
-    cy.get('[data-testid="cardDisplayDate"]').as('cardDisplayDate');
-    cy.get('[data-testid="cardDisplayCVC"]').as('cardDisplayCVC');
+    cy.get('[data-cy="cardForm"]').as('cardForm');
+    cy.get('[data-cy="cardDisplayName"]').as('cardDisplayName');
+    cy.get('[data-cy="cardDisplayNumber"]').as('cardDisplayNumber');
+    cy.get('[data-cy="cardDisplayDate"]').as('cardDisplayDate');
+    cy.get('[data-cy="cardDisplayCVC"]').as('cardDisplayCVC');
   });
 
-  test('default values for displayed are rendered with 0s', () => {
+  it('default values for displayed are rendered with 0s', () => {
     cy.get('@cardDisplayNumber').should('contain.text', '0000 0000 0000 0000');
-    cy.get('@cardDisplayName').should('contain.text', 'JANE APPLESEED');
+    cy.get('@cardDisplayName').should('contain.text', 'Jane Appleseed');
     cy.get('@cardDisplayDate').should('contain.text', '00/00');
     cy.get('@cardDisplayCVC').should('contain.text', '000');
   });
@@ -21,229 +21,229 @@ describe('initial page load', () => {
 describe('edit form and edit card display', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('[data-testid="cardDisplayName"]').as('cardDisplayName');
-    cy.get('[data-testid="cardDisplayNumber"]').as('cardDisplayNumber');
-    cy.get('[data-testid="cardDisplayDate"]').as('cardDisplayDate');
-    cy.get('[data-testid="cardDisplayCVC"]').as('cardDisplayCVC');
+    cy.get('[data-cy="cardDisplayName"]').as('cardDisplayName');
+    cy.get('[data-cy="cardDisplayNumber"]').as('cardDisplayNumber');
+    cy.get('[data-cy="cardDisplayDate"]').as('cardDisplayDate');
+    cy.get('[data-cy="cardDisplayCVC"]').as('cardDisplayCVC');
 
-    cy.get('[data-testid="cardForm"]').as('cardForm');
-    cy.get('[data-testid="cardFormNameInput"]').as('cardFormNameInput');
-    cy.get('[data-testid="cardFormNumberInput"]').as('cardFormNumberInput');
-    cy.get('[data-testid="cardFormMonthInput"]').as('cardFormMonthInput');
-    cy.get('[data-testid="CardFormYearInput"]').as('cardFormYearInput');
-    cy.get('[data-testid="cardFormCVCInput"]').as('cardFormCVCInput');
-    cy.get('[data-testid="cardFormConfirmButton"]').as('cardFormConfirmButton');
+    cy.get('[data-cy="cardForm"]').as('cardForm');
+    cy.get('[data-cy="cardFormName"]').as('cardFormName');
+    cy.get('[data-cy="cardFormNumber"]').as('cardFormNumber');
+    cy.get('[data-cy="cardFormMonth"]').as('cardFormMonth');
+    cy.get('[data-cy="cardFormYear"]').as('cardFormYear');
+    cy.get('[data-cy="cardFormCVC"]').as('cardFormCVC');
+    cy.get('[data-cy="cardFormButton"]').as('cardFormButton');
   });
 
-  test('card holder name updated on display', () => {
-    cy.get('@cardFormNameInput').type('Jorge Mendoza');
+  it('card holder name updated on display', () => {
+    cy.get('@cardFormName').type('Jorge Mendoza');
     cy.get('@cardDisplayName').should('contain.text', 'Jorge Mendoza');
   });
 
-  test('card number updated with a few numbers', () => {
-    cy.get('@cardFormNumberInput').type('123456');
-    cy.get('@carDisplayNumber').should('contain.text', '1234 5600 0000 0000');
+  it('card number updated with a few numbers', () => {
+    cy.get('@cardFormNumber').type('123456');
+    cy.get('@cardDisplayNumber').should('contain.text', '1234 56');
   });
 
-  test('card number updated with full card number', () => {
-    cy.get('@cardFormNumberInput').type('1234567812345678');
+  it('card number updated with full card number', () => {
+    cy.get('@cardFormNumber').type('1234567812345678');
     cy.get('@cardDisplayNumber').should('contain.text', '1234 5678 1234 5678');
   });
 
-  test('date updated with month', () => {
-    cy.get('@cardFormMonthInput').type('1');
+  it('date updated with month', () => {
+    cy.get('@cardFormMonth').type('1');
     cy.get('@cardDisplayDate').should('contain.text', '01/00');
   });
 
-  test('date updated with month and year', () => {
-    cy.get('@cardFormYearInput').type('22');
-    cy.get('@cardFormMonthInput').type('1');
+  it('date updated with month and year', () => {
+    cy.get('@cardFormYear').type('22');
+    cy.get('@cardFormMonth').type('1');
     cy.get('@cardDisplayDate').should('contain.text', '01/22');
   });
 
-  test('cvc updated with one number', () => {
-    cy.get('@cardFormCVCInput').type('1');
-    cy.get('@cardDisplayBackCVC').should('contain.text', '100');
+  it('cvc updated with one number', () => {
+    cy.get('@cardFormCVC').type('1');
+    cy.get('@cardDisplayCVC').should('contain.text', '1');
   });
 
-  test('cvc updated with all numbers', () => {
-    cy.get('@cardFormCVCInput').type('123');
-    cy.get('@cardDisplayBackCVC').should('contain.text', '123');
+  it('cvc updated with all numbers', () => {
+    cy.get('@cardFormCVC').type('123');
+    cy.get('@cardDisplayCVC').should('contain.text', '123');
   });
 });
 
 describe('submit valid form', () => {
+  const currentMonth = (new Date().getMonth() + 1).toString();
+  const currentYear = new Date().getFullYear().toString().slice(2);
   beforeEach(() => {
     cy.visit('/');
-    cy.get('[data-testid="cardDisplayName"]').as('cardDisplayName');
-    cy.get('[data-testid="cardDisplayNumber"]').as('cardDisplayNumber');
-    cy.get('[data-testid="cardDisplayDate"]').as('cardDisplayDate');
-    cy.get('[data-testid="cardDisplayCVC"]').as('cardDisplayCVC');
+    cy.get('[data-cy="cardDisplayName"]').as('cardDisplayName');
+    cy.get('[data-cy="cardDisplayNumber"]').as('cardDisplayNumber');
+    cy.get('[data-cy="cardDisplayDate"]').as('cardDisplayDate');
+    cy.get('[data-cy="cardDisplayCVC"]').as('cardDisplayCVC');
 
-    cy.get('[data-testid="cardForm"]').as('cardForm');
-    cy.get('[data-testid="cardFormNameInput"]').as('cardFormNameInput');
-    cy.get('[data-testid="cardFormNumberInput"]').as('cardFormNumberInput');
-    cy.get('[data-testid="cardFormMonthInput"]').as('cardFormMonthInput');
-    cy.get('[data-testid="CardFormYearInput"]').as('cardFormYearInput');
-    cy.get('[data-testid="cardFormCVCInput"]').as('cardFormCVCInput');
-    cy.get('[data-testid="cardFormConfirmButton"]').as('cardFormConfirmButton');
+    cy.get('[data-cy="cardForm"]').as('cardForm');
+    cy.get('[data-cy="cardFormName"]').as('cardFormName');
+    cy.get('[data-cy="cardFormNumber"]').as('cardFormNumber');
+    cy.get('[data-cy="cardFormMonth"]').as('cardFormMonth');
+    cy.get('[data-cy="cardFormYear"]').as('cardFormYear');
+    cy.get('[data-cy="cardFormCVC"]').as('cardFormCVC');
+    cy.get('[data-cy="cardFormButton"]').as('cardFormButton');
   });
 
-  test('submit valid card data', () => {
-    cy.get('@cardFormNameInput').type('John Doe');
-    cy.get('@cardFormNumberInput').type('1234567812345678');
-    cy.get('@cardFormMonthInput').type('1');
-    cy.get('@cardFormYearInput').type('22');
-    cy.get('@cardFormCVCInput').type('123');
-    cy.get('@cardFormInputConfirmButton').click();
+  it('submit valid card data', () => {
+    cy.get('@cardFormName').type('John Doe');
+    cy.get('@cardFormNumber').type('1234567812345678');
+    cy.get('@cardFormMonth').type(currentMonth);
+    cy.get('@cardFormYear').type(currentYear);
+    cy.get('@cardFormCVC').type('123');
+    cy.get('@cardFormButton').click();
 
     cy.get('@cardForm').should('not.exist');
-    cy.get('[data-testid="submitConfirmation"]');
+    cy.get('[data-cy="loadingSpinner"]');
+    cy.get('[data-cy="submitConfirmation"]');
   });
 
-  test('submit valid card form, return to form after confirmation', () => {
-    cy.get('@cardFormNameInput').type('John Doe');
-    cy.get('@cardFormNumberInput').type('1234567812345678');
-    cy.get('@cardFormMonthInput').type('1');
-    cy.get('@cardFormYearInput').type('22');
-    cy.get('@cardFormCVCInput').type('123');
-    cy.get('@cardFormInputConfirmButton').click();
+  it('submit valid card form, return to form after confirmation', () => {
+    cy.get('@cardFormName').type('John Doe');
+    cy.get('@cardFormNumber').type('1234567812345678');
+    cy.get('@cardFormMonth').type(currentMonth);
+    cy.get('@cardFormYear').type(currentYear);
+    cy.get('@cardFormCVC').type('123');
+    cy.get('@cardFormButton').click();
 
     cy.get('@cardForm').should('not.exist');
-    cy.get('[data-testid="submitConfirmation"]');
-    cy.get('[data-testid="submitConfirmationButton"]').click();
+    cy.get('[data-cy="loadingSpinner"]');
+    cy.get('[data-cy="submitConfirmation"]');
+    cy.get('[data-cy="submitConfirmationButton"]').click();
 
-    cy.get('[data-testid="submitConfirmation"]').should('not.exist');
+    cy.get('[data-cy="submitConfirmation"]').should('not.exist');
     cy.get('@cardForm');
 
-    cy.get('@cardFormNameInput').should('have.value', '');
-    cy.get('@cardFormNumberInput').should('have.value', '');
-    cy.get('@cardFormMonthInput').should('have.value', '');
-    cy.get('@cardFormYearInput').should('have.value', '');
-    cy.get('@cardFormCVCInput').should('have.value', '');
+    cy.get('@cardFormName').should('have.value', '');
+    cy.get('@cardFormNumber').should('have.value', '');
+    cy.get('@cardFormMonth').should('have.value', '');
+    cy.get('@cardFormYear').should('have.value', '');
+    cy.get('@cardFormCVC').should('have.value', '');
 
     cy.get('@cardDisplayName').should('contain.text', 'Jane Appleseed');
     cy.get('@cardDisplayNumber').should('contain.text', '0000 0000 0000 0000');
     cy.get('@cardDisplayDate').should('contain.text', '00/00');
-    cy.get('@cardDispalyCVC').should('contain.text', '000');
+    cy.get('@cardDisplayCVC').should('contain.text', '000');
   });
 });
 
 describe('invalid card edit and submission', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('[data-testid="cardForm"]').as('cardForm');
-    cy.get('[data-testid="cardFormNameInput"]').as('cardFormNameInput');
-    cy.get('[data-testid="cardFormNumberInput"]').as('cardFormNumberInput');
-    cy.get('[data-testid="cardFormMonthInput"]').as('cardFormMonthInput');
-    cy.get('[data-testid="CardFormYearInput"]').as('cardFormYearInput');
-    cy.get('[data-testid="cardFormCVCInput"]').as('cardFormCVCInput');
-    cy.get('[data-testid="cardFormConfirmButton"]').as('cardFormConfirmButton');
+    cy.get('[data-cy="cardForm"]').as('cardForm');
+    cy.get('[data-cy="cardFormName"]').as('cardFormName');
+    cy.get('[data-cy="cardFormNumber"]').as('cardFormNumber');
+    cy.get('[data-cy="cardFormMonth"]').as('cardFormMonth');
+    cy.get('[data-cy="cardFormYear"]').as('cardFormYear');
+    cy.get('[data-cy="cardFormCVC"]').as('cardFormCVC');
+    cy.get('[data-cy="cardFormButton"]').as('cardFormButton');
   });
 
-  test('no input into card form name', () => {
-    cy.get('@cardFormConfirmationButton').click();
-    cy.get('[data-testid="nameInputError"]').should(
+  it('no input into card form name', () => {
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="cardHolderNameError"]').should(
       'contain.text',
       `Can't be blank`
     );
   });
 
-  test('no input into card form number', () => {
-    cy.get('@cardFormConfirmationButton').click();
-    cy.get('[data-testid="numberInputError"]').should(
+  it('no input into card form number', () => {
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="cardNumberError"]').should(
+      'contain.text',
+      'Wrong format, must be exactly 16 numbers'
+    );
+  });
+
+  it('no input into card form month', () => {
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="cardMonthError"]').should(
       'contain.text',
       "Can't be blank"
     );
   });
 
-  test('no input into card form month', () => {
-    cy.get('@cardFormConfirmButton').click();
-    cy.get('[data-testid="dateInputError"]').should(
+  it('no input into card form year', () => {
+    cy.get('@cardFormMonth').type('11');
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="cardYearError"]').should(
       'contain.text',
       "Can't be blank"
     );
   });
 
-  test('no input into card form year', () => {
-    cy.get('@cardFormMonthInput').type('11');
-    cy.get('@cardFormConfirmationButton').click();
-    cy.get('[data-testid="dateInputError"]').should(
+  it('no input into card form CVC', () => {
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="cardCVCError"]').should('contain.text', "Can't be blank");
+  });
+
+  it('invalid length in card form numbers, too small', () => {
+    cy.get('@cardFormNumber').type('12345');
+    cy.get('@cardFormName').find('input').focus();
+    cy.get('[data-cy="cardNumberError"]').should(
       'contain.text',
-      "Can't be blank"
+      'Wrong format, must be exactly 16 numbers'
     );
   });
 
-  test('no input into card form CVC', () => {
-    cy.get('@cardFormConfirmationButton').click();
-    cy.get('[data-testid="cvcInputError"]').should(
+  it('invalid characters in card form number', () => {
+    cy.get('@cardFormNumber').type('123456781234abcd');
+    cy.get('@cardFormName').find('input').focus();
+    cy.get('[data-cy="cardNumberError"]').should(
       'contain.text',
-      "Can't be blank"
+      'Wrong format, numbers only'
     );
   });
 
-  test('invalid length in card form numbers, too small', () => {
-    cy.get('@cardFormNumberInput').type('12345');
-    cy.get('@cardFormNameInput').focus();
-    cy.get('[data-input="numberInputError"]').should(
-      'contain.text',
-      'Wrong format, number too short'
-    );
-  });
-
-  test('invalid characters in card form number', () => {
-    cy.get('@cardFormNumberInput').type('123456781234abcd');
-    cy.get('@cardFormNameInput').focus();
-    cy.get('[data-testid="numberInputError"]').should(
-      'contain.text',
-      'Wrong format, nubmers only'
-    );
-  });
-
-  test('invalid month value in card for month', () => {
-    cy.get('@cardFormMonthInput').type('14');
-    cy.get('@cardFormYearInput').focus();
-    cy.get('[data-testid="dataInputError"]').should(
+  it('invalid month value in card for month', () => {
+    cy.get('@cardFormMonth').type('14');
+    cy.get('@cardFormYear').find('input').focus();
+    cy.get('[data-cy="cardMonthError"]').should(
       'contain.text',
       'Invalid month'
     );
   });
 
-  test('invalid year value in card form year', () => {
-    cy.get('@cardFormMonthInput').type('5');
-    cy.get('@cardFormYearInput').type('20');
-    cy.get('@cardFormCVCInput').focus();
-    cy.get('[data-testid="dateInputError"]').should(
+  it('invalid year value in card form year', () => {
+    cy.get('@cardFormMonth').type('5');
+    cy.get('@cardFormYear').type('20');
+    cy.get('@cardFormCVC').find('input').focus();
+    cy.get('[data-cy="cardYearError"]').should('contain.text', 'Invalid year');
+  });
+
+  it('invalid date for card form date', () => {
+    cy.get('@cardFormMonth').type('7');
+    cy.get('@cardFormYear').type('22');
+    cy.get('@cardFormName').type('Jorge Mendoza');
+    cy.get('@cardFormNumber').type('1234123412341234');
+    cy.get('@cardFormCVC').type('123');
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="cardMonthError"]').should('contain.text', 'Invalid date');
+  });
+
+  it('invalid length for card form cvc, too small', () => {
+    cy.get('@cardFormCVC').type('12');
+    cy.get('@cardFormNumber').find('input').focus();
+    cy.get('[data-cy="cardCVCError"]').should(
       'contain.text',
-      'Invalid year'
+      'Wrong format, must be three digits'
     );
   });
 
-  test('invalid date for card form date', () => {
-    cy.get('@cardFormMonthInput').type('7');
-    cy.get('@cardFormYearInput').type('22');
-    cy.get('@cardFormCVCInput').focus();
-    cy.get('@cardFormConfirmButton').click();
-    cy.get('[data-testid=""dateInputError]').should(
-      'contain.text',
-      'Invalid date'
-    );
-  });
+  it('invalid form, confirmation not rendered not rendered', () => {
+    cy.get('@cardFormName').type('Ann Appleseed');
+    cy.get('@cardFormNumber').type('12345678');
+    cy.get('@cardFormMonth').type('1');
+    cy.get('@cardFormYear').type('98');
+    cy.get('@cardFormCVC').type('123');
 
-  test('invalid length for card form cvc, too small', () => {
-    cy.get('@cardFormCVCInput').type('12');
-    cy.get('@cardFormNumberInput').focus();
-    cy.get('[data-testid="cvcInputError"]').should('Invalid CVC number');
-  });
-
-  test('invalid form, confirmation not rendered not rendered', () => {
-    cy.get('@cardFormNameInput').type('Ann Appleseed');
-    cy.get('@cardFormNumberInput').type('12345678');
-    cy.get('@cardFormMonthInput').type('1');
-    cy.get('@cardFormYearInput').type('98');
-    cy.get('@cardFormCVCInput').type('123');
-
-    cy.get('@caredFormConfirmButton').click();
-    cy.get('[data-testid="submitConfirmation"]').should('not.exist');
+    cy.get('@cardFormButton').click();
+    cy.get('[data-cy="loadingSpinner"]').should('not.exist');
   });
 });

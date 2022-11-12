@@ -18,7 +18,7 @@ const DateFieldStyled = styled.div<DateFieldStyledProps>`
 
   p:last-child {
     font-size: var(--small-text);
-    text-transform: none;
+    text-transform: capitalize;
     color: #ff5050;
     margin-block-start: 0.8rem;
   }

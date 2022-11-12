@@ -47,7 +47,7 @@ const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
     <DateFieldStyled monthInvalid={monthInvalid} yearInvalid={yearInvalid}>
       <p>{labelText}</p>
       <div>
-        <label data-testid="cardMonthExp">
+        <label data-cy="cardFormMonth">
           <input
             {...monthField}
             {...monthProps}
@@ -59,7 +59,7 @@ const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
           />
         </label>
 
-        <label data-testid="cardYearExp">
+        <label data-cy="cardFormYear">
           <input
             {...yearField}
             {...yearProps}
@@ -73,9 +73,9 @@ const DateField = ({ labelText, monthProps, yearProps }: DateFieldProps) => {
       </div>
 
       {monthMeta.touched && monthMeta.error ? (
-        <p>{monthMeta.error}</p>
+        <p data-cy="cardMonthError">{monthMeta.error}</p>
       ) : yearMeta.touched && yearMeta.error ? (
-        <p>{yearMeta.error}</p>
+        <p data-cy="cardYearError">{yearMeta.error}</p>
       ) : null}
     </DateFieldStyled>
   );

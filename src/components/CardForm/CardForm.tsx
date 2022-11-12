@@ -39,15 +39,15 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
           ) {
             setFormSent('sent');
           } else {
-            actions.setFieldError('cardMonthExp', 'invalid date');
-            actions.setFieldError('cardYearExp', 'invalid date');
+            actions.setFieldError('cardMonthExp', 'Invalid date');
+            actions.setFieldError('cardYearExp', 'Invalid date');
           }
           actions.setSubmitting(false);
         }}
       >
-        <Form>
+        <Form data-cy="cardForm">
           <div>
-            <label data-testid="cardHolderName">
+            <label data-cy="cardFormName">
               Cardholder name
               <TextField
                 inputProps={{
@@ -61,7 +61,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
           </div>
 
           <div>
-            <label data-testid="cardNumber">
+            <label data-cy="cardFormNumber">
               Card number
               <TextField
                 inputProps={{
@@ -95,7 +95,7 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
               }}
             />
 
-            <label data-testid="cardCVC">
+            <label data-cy="cardFormCVC">
               CVC
               <TextField
                 inputProps={{
@@ -108,7 +108,9 @@ const CardForm = ({ changeToLoading }: CardFormComponentProps) => {
             </label>
           </DateCVCWrapper>
 
-          <PrimaryButton type="submit">confirm</PrimaryButton>
+          <PrimaryButton type="submit" data-cy="cardFormButton">
+            confirm
+          </PrimaryButton>
         </Form>
       </Formik>
     </CardFormStyled>

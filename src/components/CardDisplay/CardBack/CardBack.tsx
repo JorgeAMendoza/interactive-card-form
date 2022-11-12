@@ -5,7 +5,7 @@ const CardBack = () => {
   const { state } = useCardDisplayContext();
   return (
     <CardBackStyled>
-      <p>{state.cardCVC}</p>
+      <p data-cy="cardDisplayCVC">{state.cardCVC}</p>
     </CardBackStyled>
   );
 };
