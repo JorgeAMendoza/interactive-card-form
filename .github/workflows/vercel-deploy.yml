@@ -1,0 +1,33 @@
+name: Vercel Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  vercel_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - name: npm install
+        run: npm ci
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm test
+      - name: build app
+        run: npm run build
+      - name: cypress test
+        uses: cypress-io/github-action@v4
+        with:
+          command: npm run cypress:run
+          start: npm run preview
+          wait-on: http://localhost:4173
