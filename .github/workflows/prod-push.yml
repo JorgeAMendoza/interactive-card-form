@@ -21,12 +21,10 @@ jobs:
         run: npm ci
       - name: lint
         run: npm run lint
-      - name: build app
-        run: npm run build
       - name: E2E on chrome
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v4.2.0
         with:
           browser: chrome
-          command: npm run cypress:run
+          build: npm run build
           start: npm run preview
           wait-on: http://localhost:3000
