@@ -41,12 +41,17 @@ const DateFieldStyled = styled.div<DateFieldStyledProps>`
     display: block;
     width: 100%;
     padding: var(--padding-sm);
-    color: inherit;
+    color: #21092f;
     border-radius: 4px;
-    font-weight: inherit;
+    font-weight: 500;
 
     &:focus {
       outline: 1px solid var(--primary-color);
+    }
+
+    &::placeholder {
+      color: #21092f;
+      opacity: 0.25;
     }
   }
 

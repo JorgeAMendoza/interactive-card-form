@@ -13,11 +13,16 @@ const TextFieldStyled = styled.div<TextFieldStyledProps>`
       ${({ inputInvalid }) => (inputInvalid ? 'red' : '#dfdee0')};
     width: 100%;
     padding: var(--padding-sm);
-    color: inherit;
-    font-weight: inherit;
+    color: #21092f;
+    font-weight: 500;
 
     &:focus {
       outline: 1px solid var(--primary-color);
+    }
+
+    &::placeholder {
+      color: #21092f;
+      opacity: 0.25;
     }
   }
 
