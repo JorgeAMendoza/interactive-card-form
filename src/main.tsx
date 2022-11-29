@@ -1,10 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { CardDisplayProvider } from './context/CardDisplayContext';
+import App from './App';
+import GlobalStyles from './styles/Global.styled';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <GlobalStyles />
+    <CardDisplayProvider>
+      <App />
+    </CardDisplayProvider>
   </React.StrictMode>
-)
+);
