@@ -11,7 +11,7 @@ on:
 
 jobs:
   vercel_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -21,13 +21,17 @@ jobs:
         run: npm ci
       - name: lint
         run: npm run lint
-      - name: test
-        run: npm test
-      - name: build app
-        run: npm run build
-      - name: cypress test
-        uses: cypress-io/github-action@v4
+      - name: E2E on chrome
+        uses: cypress-io/github-action@v4.2.0
         with:
-          command: npm run cypress:run
+          browser: chrome
+          build: npm run build
           start: npm run preview
-          wait-on: http://localhost:4173
+      - name: vercel deploy
+        uses: amondnet/vercel-action@v20
+        if: ${{!contains(github.event.commits.*.message, '#skip') && github.event_name == 'push'}}
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
